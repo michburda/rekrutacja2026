@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://giarddesign-rekrutacja.michal911.chatgpt.site/sitemap.xml
