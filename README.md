@@ -15,8 +15,7 @@ Responsywne wdrożenie landing page’a przygotowane na podstawie projektu Figma
 
 - Vue 3 Composition API,
 - Vite i TypeScript,
-- Tailwind CSS 4,
-- Cloudflare Workers / Sites.
+- Tailwind CSS 4.
 
 ## Uruchomienie
 
@@ -32,5 +31,7 @@ Weryfikacja wersji produkcyjnej:
 ```bash
 npm test
 ```
+
+Gotowe pliki do wysłania na hosting znajdują się w katalogu `dist`.
 
 Kod strony jest częścią zadania rekrutacyjnego. Projekt graficzny pozostaje własnością adRespect.pl.

@@ -1,6 +1,5 @@
 import vue from "@vitejs/plugin-vue";
 import { defineConfig, type Plugin } from "vite";
-import { sites } from "./build/sites-vite-plugin";
 
 const inlineCss = (): Plugin => ({
   name: "inline-css",
@@ -32,5 +31,5 @@ const inlineCss = (): Plugin => ({
 });
 
 export default defineConfig(({ isSsrBuild }) => ({
-  plugins: [vue(), ...(isSsrBuild ? [] : [inlineCss(), sites()])],
+  plugins: [vue(), ...(isSsrBuild ? [] : [inlineCss()])],
 }));

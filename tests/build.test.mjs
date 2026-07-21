@@ -2,16 +2,20 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("builds the Vue application and deployable Worker", async () => {
-  const [html, appSource, worker] = await Promise.all([
+test("builds an optimized static Vue application", async () => {
+  const [html, appSource, robots, sitemap] = await Promise.all([
     readFile(new URL("../dist/index.html", import.meta.url), "utf8"),
     readFile(new URL("../src/App.vue", import.meta.url), "utf8"),
-    import(new URL(`../dist/server/index.js?test=${Date.now()}`, import.meta.url)),
+    readFile(new URL("../dist/robots.txt", import.meta.url), "utf8"),
+    readFile(new URL("../dist/sitemap.xml", import.meta.url), "utf8"),
   ]);
 
   assert.match(html, /<title>GiardDesign — nowoczesne ogrody<\/title>/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/www\.michalburda\.pl\/"/);
+  assert.doesNotMatch(html, /rel="stylesheet"/);
   assert.match(appSource, /Nowoczesna aranżacja/);
   assert.match(appSource, /v-for="\(service, index\) in services"/);
   assert.match(appSource, /adRespect\.pl/);
-  assert.equal(typeof worker.default.fetch, "function");
+  assert.match(robots, /https:\/\/www\.michalburda\.pl\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/www\.michalburda\.pl\/<\/loc>/);
 });
